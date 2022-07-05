@@ -1,0 +1,16 @@
+[data-orientation="1"] {
+  transform: rotate(90deg);
+}
+
+[data-orientation="2"] {
+  transform: rotate(180deg);
+}
+
+[data-orientation="3"] {
+  transform: rotate(270deg);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}

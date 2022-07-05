@@ -1,4 +1,8 @@
-<div class="d-flex flex-column align-items-center h-100 pt-3">
+<div
+  id="app-root"
+  class="d-flex flex-column align-items-center h-100 pt-3"
+  (click)="handleClick($event)"
+>
   <app-board class="mb-1"></app-board>
   <app-toolbox class="mt-auto" [tools]="tools | async"></app-toolbox>
 </div>

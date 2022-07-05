@@ -1,6 +1,9 @@
-export interface Tool {
-  name: string;
+export interface Tool extends DeleteTool {
   desc: string;
-  selected: boolean;
   rotationStage: number;
+}
+
+export interface DeleteTool {
+  name: string;
+  selected: boolean;
 }

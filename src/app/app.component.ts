@@ -19,4 +19,9 @@ export class AppComponent {
   constructor(private store: Store<AppState>) {
     this.tools = this.store.select('tools');
   }
+
+  handleClick(event: any) {
+    if (event?.target?.id !== 'app-root') return;
+    this.store.dispatch(new SetSelectedTool('none'));
+  }
 }

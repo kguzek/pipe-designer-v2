@@ -2,15 +2,18 @@
 <div class="d-flex justify-content-center">
   <button (click)="reset()" class="mb-1">Reset</button>
 </div>
-<h2 *ngIf="winner">Player {{ winner }} won the game!</h2>
 <main class="d-flex flex-column">
   <div class="d-flex">
     <div class="container">
-      <div class="row" *ngFor="let _ of [].constructor(rows); index as row">
+      <div
+        *ngFor="let _ of [].constructor(rows); index as row"
+        class="row"
+        id="row-{{ row }}"
+      >
         <app-square
           class="col bg-light box d-flex align-items-center justify-content-center"
           *ngFor="let _ of [].constructor(columns); index as col"
-          [value]="'X'"
+          id="col-{{ col }}"
           (click)="onClick(row, col)"
         >
         </app-square>

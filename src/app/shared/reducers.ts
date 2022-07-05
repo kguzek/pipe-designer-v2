@@ -1,11 +1,11 @@
-import { Tool } from './models';
+import { DeleteTool, Tool } from './models';
 import {
   ACTION_TYPE,
   Actions as Action,
   SetSelectedTool,
 } from './tools.actions';
 
-const initialState: Tool[] = [
+const initialState: Array<Tool | DeleteTool> = [
   {
     name: 'cross',
     desc: 'Cross-shaped',
@@ -30,10 +30,17 @@ const initialState: Tool[] = [
     selected: false,
     rotationStage: 0,
   },
+  {
+    name: 'btn-delete',
+    selected: false,
+  },
 ];
 
-export function toolReducer(state: Tool[] = initialState, action: Action) {
-  console.log(action.type, state);
+export function toolReducer(
+  state: Array<Tool | DeleteTool> = initialState,
+  action: Action
+) {
+  console.debug(action.type, state);
 
   switch (action.type as ACTION_TYPE) {
     case ACTION_TYPE.SET_SELECTED_TOOL:
@@ -44,7 +51,7 @@ export function toolReducer(state: Tool[] = initialState, action: Action) {
     case ACTION_TYPE.ROTATE_TOOL:
       return state.map((tool) =>
         tool.selected
-          ? { ...tool, rotationStage: (tool.rotationStage + 1) % 4 }
+          ? { ...tool, rotationStage: ((tool as Tool).rotationStage + 1) % 4 }
           : tool
       );
     default:
