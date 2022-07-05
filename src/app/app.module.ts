@@ -3,12 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SquareComponent } from './square/square.component';
-import { BoardComponent } from './board/board.component';
+import { SquareComponent } from './components/square/square.component';
+import { BoardComponent } from './components/board/board.component';
+import { GridAddBtnComponent } from './components/grid-add-btn/grid-add-btn.component';
+import { ToolboxComponent } from './components/toolbox/toolbox.component';
+import { ToolboxOptionComponent } from './components/toolbox-option/toolbox-option.component';
+
+import { StoreModule } from '@ngrx/store';
+import { toolReducer } from './shared/reducers';
 
 @NgModule({
-  declarations: [AppComponent, SquareComponent, BoardComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    SquareComponent,
+    BoardComponent,
+    GridAddBtnComponent,
+    ToolboxComponent,
+    ToolboxOptionComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    StoreModule.forRoot({
+      tools: toolReducer,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

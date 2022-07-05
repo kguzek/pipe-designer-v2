@@ -1,0 +1,16 @@
+app-square {
+  border: 1px gray solid;
+  min-width: 130px;
+  min-height: 130px;
+}
+
+.add-cols-btn {
+  display: flex;
+  align-items: center;
+  width: 40px;
+}
+
+.add-rows-btn {
+  height: 40px;
+  margin-right: 37px;
+}

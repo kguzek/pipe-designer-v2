@@ -1,0 +1,21 @@
+<div class="d-flex flex-column mt-auto">
+  <div class="text-center user-select-none">
+    <div id="btn-rotate" colspan="5" class="pt-3 pb-3 disabled" role="button">
+      <i class="fas fa-rotate-right fa-2xl"></i>
+    </div>
+  </div>
+  <div id="options" class="d-flex">
+    <app-toolbox-option
+      *ngFor="let option of ['cross', 'T', 'L', 'straight']; index as i"
+      [option]="option"
+      [alt]="i < 3 ? option + '-shaped' : 'Straight'"
+      class="{{ getClassName(option) }}"
+    ></app-toolbox-option>
+    <button
+      id="btn-delete"
+      class="d-flex align-items-center justify-content-center"
+    >
+      <i class="fas fa-trash pipe"></i>
+    </button>
+  </div>
+</div>

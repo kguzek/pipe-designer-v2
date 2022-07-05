@@ -1,0 +1,32 @@
+#btn-rotate,
+#options > * {
+  border: 1px solid grey;
+}
+
+#btn-rotate {
+  color: rgb(57, 120, 255);
+  background-color: lightgray;
+}
+
+#btn-rotate.disabled {
+  color: grey;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+#btn-delete {
+  width: 130px;
+  font-size: 4rem;
+}
+
+
+#btn-delete.selected {
+  border-color: rgb(122, 0, 0) !important;
+  background-color: rgb(231, 67, 56);
+  border-width: 2px !important;
+}
+
+app-toolbox-option.selected {
+  border-color: blue !important;
+  background-color: rgb(57, 120, 255);
+  border-width: 2px !important;
+}

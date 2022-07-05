@@ -1,0 +1,30 @@
+<h1>Pipe Designer</h1>
+<div class="d-flex justify-content-center">
+  <button (click)="reset()" class="mb-1">Reset</button>
+</div>
+<h2 *ngIf="winner">Player {{ winner }} won the game!</h2>
+<main class="d-flex flex-column">
+  <div class="d-flex">
+    <div class="container">
+      <div class="row" *ngFor="let _ of [].constructor(rows); index as row">
+        <app-square
+          class="col bg-light box d-flex align-items-center justify-content-center"
+          *ngFor="let _ of [].constructor(columns); index as col"
+          [value]="'X'"
+          (click)="onClick(row, col)"
+        >
+        </app-square>
+      </div>
+    </div>
+    <app-grid-add-btn
+      class="btn col text-white bg-secondary add-cols-btn"
+      (click)="handleAdd('column')"
+    ></app-grid-add-btn>
+  </div>
+  <div class="d-flex">
+    <app-grid-add-btn
+      class="btn text-white bg-secondary add-rows-btn flex-fill"
+      (click)="handleAdd('row')"
+    ></app-grid-add-btn>
+  </div>
+</main>

@@ -6,33 +6,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  squares: Array<'X' | 'O'> = [];
-  xIsNext: boolean = true;
+  squares!: Array<'X' | 'O'>;
+  xIsNext!: boolean;
   winner: string | null = null;
+
+  rows = 3;
+  columns = 3;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.newGame();
+    this.reset();
   }
 
-  newGame() {
-    this.squares = Array(9).fill(null);
-    this.xIsNext = true;
-    this.winner = null;
+  reset() {
+    this.rows = 3;
+    this.columns = 3;
   }
 
   get player() {
     return this.xIsNext ? 'X' : 'O';
   }
 
-  makeMove(idx: number) {
-    if (this.squares[idx]) {
-      return;
+  handleAdd(dimension: string) {
+    if (dimension === 'row') {
+      this.rows += 1;
+    } else {
+      if (this.columns >= 10) return;
+      this.columns += 1;
     }
-    this.squares.splice(idx, 1, this.player);
-    this.winner = this.calculateWinner();
-    this.xIsNext = !this.xIsNext;
+  }
+
+  onClick(row: number, column: number) {
+    console.log('Clicked row', row, 'column', column);
   }
 
   calculateWinner() {
