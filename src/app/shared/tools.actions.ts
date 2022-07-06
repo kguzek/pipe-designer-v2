@@ -10,7 +10,7 @@ export class SetSelectedTool implements Action {
 export class RotateSelectedTool implements Action {
   readonly type = ACTION_TYPE.ROTATE_TOOL as string;
 
-  constructor() {}
+  constructor(public payload: boolean) {}
 }
 
-export type Actions = SetSelectedTool | RotateSelectedTool;
+export type Actions = Action | SetSelectedTool | RotateSelectedTool;

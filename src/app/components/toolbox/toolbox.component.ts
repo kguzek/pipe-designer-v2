@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Tool } from 'src/app/shared/models';
@@ -25,7 +25,21 @@ export class ToolboxComponent implements OnInit {
   isSelected = (option: string) =>
     this.tools?.find((tool) => tool.selected)?.name === option;
 
-  handleRotate() {
-    this.store.dispatch(new RotateSelectedTool());
+  handleRotate(antiClockwise: boolean = false) {
+    this.store.dispatch(new RotateSelectedTool(antiClockwise));
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'r':
+        this.handleRotate();
+        break;
+      case 'R':
+        this.handleRotate(true);
+        break;
+      default:
+        break;
+    }
   }
 }

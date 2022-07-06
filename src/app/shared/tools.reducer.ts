@@ -1,5 +1,9 @@
 import { ACTION_TYPE, DeleteTool, Tool } from './models';
-import { Actions as Action, SetSelectedTool } from './tools.actions';
+import {
+  Actions as Action,
+  RotateSelectedTool,
+  SetSelectedTool,
+} from './tools.actions';
 
 const initialState: Array<Tool | DeleteTool> = [
   {
@@ -45,9 +49,13 @@ export function toolReducer(
         selected: tool.name === (action as SetSelectedTool).payload,
       }));
     case ACTION_TYPE.ROTATE_TOOL:
+      const isAntiClockwise = (action as RotateSelectedTool).payload;
+      const getOrientation = (tool: Tool) =>
+        (tool.orientation + (isAntiClockwise ? 3 : 1)) % 4;
+
       return state.map((tool) =>
         tool.selected
-          ? { ...tool, orientation: ((tool as Tool).orientation + 1) % 4 }
+          ? { ...tool, orientation: getOrientation(tool as Tool) }
           : tool
       );
     default:
