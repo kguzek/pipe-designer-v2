@@ -10,7 +10,8 @@ import { ToolboxComponent } from './components/toolbox/toolbox.component';
 import { ToolboxOptionComponent } from './components/toolbox-option/toolbox-option.component';
 
 import { StoreModule } from '@ngrx/store';
-import { toolReducer } from './shared/reducers';
+import { toolReducer } from './shared/tools.reducer';
+import { pipeReducer } from './shared/pipes.reducer';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { toolReducer } from './shared/reducers';
     AppRoutingModule,
     StoreModule.forRoot({
       tools: toolReducer,
+      pipes: pipeReducer,
     }),
   ],
   providers: [],

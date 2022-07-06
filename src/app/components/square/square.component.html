@@ -1,6 +1,6 @@
 <img
-  *ngIf="toolName && toolDesc"
-  src="assets/images/pipe-{{ toolName }}.png"
-  alt="{{ toolDesc }} pipe element"
-  attr.data-orientation="{{ rotationStage ?? 0 }}"
+  *ngIf="pipe?.name && pipe?.desc"
+  src="assets/images/pipe-{{ pipe?.name }}.png"
+  alt="{{ pipe?.desc }} pipe element"
+  attr.data-orientation="{{ pipe?.orientation ?? 0 }}"
 />

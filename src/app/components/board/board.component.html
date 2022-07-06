@@ -1,13 +1,10 @@
 <h1>Pipe Designer</h1>
-<div class="d-flex justify-content-center">
-  <button (click)="reset()" class="mb-1">Reset</button>
-</div>
 <main class="d-flex flex-column">
   <div class="d-flex">
-    <div class="container">
+    <div class="container p-0 {{ getSelectedTool() ? 'hoverable' : '' }} ">
       <div
         *ngFor="let _ of [].constructor(rows); index as row"
-        class="row"
+        class="d-flex"
         id="row-{{ row }}"
       >
         <app-square
@@ -15,6 +12,8 @@
           *ngFor="let _ of [].constructor(columns); index as col"
           id="col-{{ col }}"
           (click)="onClick(row, col)"
+          [pipe]="pipes?.[row]?.[col]"
+          [tools]="tools"
         >
         </app-square>
       </div>
@@ -31,3 +30,6 @@
     ></app-grid-add-btn>
   </div>
 </main>
+<div class="d-flex justify-content-center">
+  <button (click)="reset()" class="mt-2 w-25">Reset</button>
+</div>

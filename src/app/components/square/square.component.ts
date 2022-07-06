@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Pipe, Tool } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-square',
@@ -6,7 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./square.component.scss'],
 })
 export class SquareComponent {
-  @Input() toolName?: string;
-  @Input() toolDesc?: string;
-  @Input() rotationStage?: number;
+  @Input() pipe!: Pipe | undefined;
+  @Input() tools!: Tool[] | null;
 }

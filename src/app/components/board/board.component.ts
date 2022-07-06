@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { Pipe, PipeGrid, Tool } from 'src/app/shared/models';
+import { PlacePipeInGrid, ResetPipes } from 'src/app/shared/pipes.actions';
 
 @Component({
   selector: 'app-board',
@@ -8,8 +12,10 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
   rows!: number;
   columns!: number;
+  @Input() tools!: Tool[] | null;
+  @Input() pipes!: PipeGrid | null;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.reset();
@@ -18,7 +24,10 @@ export class BoardComponent implements OnInit {
   reset() {
     this.rows = 3;
     this.columns = 3;
+    this.store.dispatch(new ResetPipes());
   }
+
+  getSelectedTool = () => this.tools?.find((tool) => tool.selected);
 
   handleAdd(dimension: string) {
     if (dimension === 'row') {
@@ -30,6 +39,9 @@ export class BoardComponent implements OnInit {
   }
 
   onClick(row: number, column: number) {
-    console.log('Clicked row', row, 'column', column);
+    const selectedTool = this.getSelectedTool();
+    if (!selectedTool) return;
+    const { selected, ...pipe } = selectedTool;
+    this.store.dispatch(new PlacePipeInGrid({ row, column, pipe }));
   }
 }
