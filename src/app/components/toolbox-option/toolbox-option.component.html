@@ -1,10 +1,19 @@
-<div *ngIf="tool.name !== 'btn-delete'" role="button" (click)="handleClick()">
+<div
+  *ngIf="tool.name !== 'btn-delete'"
+  role="button"
+  (click)="handleClick()"
+  class="{{ selected ? 'selected' : '' }}"
+>
   <img
     src="assets/images/pipe-{{ tool.name }}.png"
     alt="{{ tool.desc }} pipe element"
     attr.data-orientation="{{ tool.rotationStage }}"
   />
 </div>
-<button *ngIf="tool.name === 'btn-delete'" (click)="handleClick()">
+<button
+  *ngIf="tool.name === 'btn-delete'"
+  (click)="handleClick()"
+  class="{{ selected ? 'selected' : '' }}"
+>
   <i class="fas fa-trash pipe"></i>
 </button>

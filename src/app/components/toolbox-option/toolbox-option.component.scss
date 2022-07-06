@@ -10,7 +10,25 @@
   transform: rotate(270deg);
 }
 
+:not(button).selected {
+  border: 2px solid blue;
+  background-color: rgb(57, 120, 255);
+
+  img {
+    filter: opacity(40%);
+    cursor: default;
+  }
+}
+
+
 button {
   background-color: transparent;
   border: none;
+  width: 100%;
+  height: 100%;
+}
+
+button.selected {
+  border: 2px solid rgb(122, 0, 0);
+  background-color: rgb(231, 67, 56);
 }

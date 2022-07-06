@@ -11,6 +11,7 @@ import { SetSelectedTool } from 'src/app/shared/tools.actions';
 })
 export class ToolboxOptionComponent implements OnInit {
   @Input() tool!: Tool;
+  @Input() selected!: boolean;
 
   constructor(private store: Store<AppState>) {}
 

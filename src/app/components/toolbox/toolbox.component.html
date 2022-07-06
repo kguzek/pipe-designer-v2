@@ -15,7 +15,12 @@
       *ngFor="let tool of tools"
       id="option-{{ tool.name }}"
       [tool]="tool"
-      class="{{ getToolClassName(tool.name) }}"
+      [selected]="isSelected(tool.name)"
+      class="{{
+        tool.name === 'btn-delete'
+          ? 'd-flex align-items-center justify-content-center'
+          : ''
+      }}"
     ></app-toolbox-option>
   </div>
 </div>

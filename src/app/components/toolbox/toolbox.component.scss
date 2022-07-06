@@ -17,15 +17,3 @@ app-toolbox-option, #btn-rotate {
   font-size: 4rem;
   width: 130px;
 }
-
-#option-btn-delete.selected {
-  border-color: rgb(122, 0, 0) !important;
-  background-color: rgb(231, 67, 56);
-  border-width: 2px !important;
-}
-
-app-toolbox-option.selected {
-  border-color: blue !important;
-  background-color: rgb(57, 120, 255);
-  border-width: 2px !important;
-}

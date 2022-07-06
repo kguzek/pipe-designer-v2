@@ -22,17 +22,8 @@ export class ToolboxComponent implements OnInit {
     return selectedTool && selectedTool !== 'btn-delete' ? '' : 'disabled';
   }
 
-  getToolClassName(option: string): string {
-    const selectedTool = this.tools?.find((tool) => tool.selected)?.name;
-    let className =
-      option === 'btn-delete'
-        ? 'd-flex align-items-center justify-content-center'
-        : '';
-    if (selectedTool === option) {
-      className += ' selected';
-    }
-    return className;
-  }
+  isSelected = (option: string) =>
+    this.tools?.find((tool) => tool.selected)?.name === option;
 
   handleRotate() {
     this.store.dispatch(new RotateSelectedTool());
