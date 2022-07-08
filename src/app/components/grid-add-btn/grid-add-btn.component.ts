@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-grid-add-btn',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./grid-add-btn.component.scss'],
 })
 export class GridAddBtnComponent {
+  @Input() disabled!: boolean;
+  @Input() column!: boolean;
+
   constructor() {}
 }

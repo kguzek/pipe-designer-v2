@@ -1,6 +1,19 @@
-<img
-  *ngIf="pipe?.name && pipe?.desc"
-  src="assets/images/pipe-{{ pipe?.name }}.png"
-  alt="{{ pipe?.desc }} pipe element"
-  attr.data-orientation="{{ pipe?.orientation ?? 0 }}"
-/>
+<div
+  (mouseenter)="preview = true"
+  (mouseleave)="preview = false"
+  class="bg-white"
+>
+  <img
+    *ngIf="preview && selectedTool"
+    src="assets/images/pipe-{{ selectedTool?.name }}.png"
+    alt="{{ selectedTool?.desc }} pipe element"
+    attr.data-orientation="{{ selectedTool?.orientation ?? 0 }}"
+    class="preview"
+  />
+  <img
+    *ngIf="!(preview && selectedTool) && pipe?.name && pipe?.desc"
+    src="assets/images/pipe-{{ pipe?.name }}.png"
+    alt="{{ pipe?.desc }} pipe element"
+    attr.data-orientation="{{ pipe?.orientation ?? 0 }}"
+  />
+</div>

@@ -14,19 +14,23 @@
           (click)="onClick(row, col)"
           [pipe]="pipes?.[row]?.[col]"
           [tools]="tools"
+          [selectedTool]="getSelectedTool()"
         >
         </app-square>
       </div>
     </div>
     <app-grid-add-btn
-      class="btn col text-white bg-secondary add-cols-btn"
+      class="add-cols-btn col"
       (click)="handleAdd('column')"
+      [column]="true"
+      [disabled]="columnsFull()"
     ></app-grid-add-btn>
   </div>
   <div class="d-flex">
     <app-grid-add-btn
-      class="btn text-white bg-secondary add-rows-btn flex-fill"
+      class="add-rows-btn w-100"
       (click)="handleAdd('row')"
+      [column]="false"
     ></app-grid-add-btn>
   </div>
 </main>

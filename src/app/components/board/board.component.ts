@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Pipe, PipeGrid, Tool } from 'src/app/shared/models';
+import { PipeGrid, Tool } from 'src/app/shared/models';
 import { PlacePipeInGrid, ResetPipes } from 'src/app/shared/pipes.actions';
 
 @Component({
@@ -29,11 +29,13 @@ export class BoardComponent implements OnInit {
 
   getSelectedTool = () => this.tools?.find((tool) => tool.selected);
 
+  columnsFull = () => this.columns >= 10;
+
   handleAdd(dimension: string) {
     if (dimension === 'row') {
       this.rows += 1;
     } else {
-      if (this.columns >= 10) return;
+      if (this.columnsFull()) return;
       this.columns += 1;
     }
   }
