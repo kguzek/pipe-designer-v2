@@ -1,5 +1,6 @@
 import {
   ACTION_TYPE,
+  DIRECTION,
   Pipe,
   PipeGrid,
   PipeName,
@@ -44,13 +45,58 @@ const placePipe = (
   [row]: { ...(state[row] ?? {}), [column]: pipe },
 });
 
+const getPipeConnections = (pipe: Pipe) =>
+  PIPE_CONNECTIONS[pipe.name].map((side) => (side + pipe.orientation) % 4);
+
 function validatePipePlacement(
   state: PipeGrid,
-  { row, column, pipe }: PipeActionPayload
+  { row, column, pipe: p }: PipeActionPayload
 ): boolean {
-  const pipeName: PipeName = (pipe as Pipe).name;
-  const orientations = PIPE_CONNECTIONS[pipeName];
-  return true;
+  const pipe = p as Pipe;
+  const pipeConnections = getPipeConnections(pipe);
+  console.log('Pipe connections:', pipeConnections);
+
+  let tempConnections: DIRECTION[];
+
+  function checkAdjoiningPipe(
+    pipeToCheck: Pipe | undefined,
+    directionToPipe: DIRECTION
+  ) {
+    // Ensure there is a pipe in the cell in that direction
+    if (!pipeToCheck) return true;
+    tempConnections = getPipeConnections(pipeToCheck);
+    const connectionA = pipeConnections.includes(directionToPipe);
+    const directionFromPipe = (directionToPipe + 2) % 4;
+    const connectionB = tempConnections.includes(directionFromPipe);
+    const bothConnected = connectionA && connectionB;
+    const neitherConnected = !connectionA && !connectionB;
+    // This means that the connection is legal
+    if (bothConnected || neitherConnected) return true;
+    // console.error(
+    //   'Cannot place pipe because of existing pipe in direction %d.\nProblematic pipe:',
+    //   directionToPipe,
+    //   pipeToCheck,
+    //   tempConnections
+    // );
+    return false;
+  }
+
+  const checks = [];
+
+  for (const dir in DIRECTION) {
+    const direction: DIRECTION = parseInt(dir);
+    if (isNaN(direction)) continue;
+    const isVertically = direction % 2 === 0;
+    const [rowIdx, colIdx] = isVertically
+      ? // Get the next/previous row in the same column
+        [row - 1 + direction, column]
+      : // Get the next/previous column in the same row
+        [row, column + 2 - direction];
+    const cellToCheck = state[rowIdx]?.[colIdx];
+    checks.push(() => checkAdjoiningPipe(cellToCheck, direction));
+  }
+
+  return checks.every((check) => check());
 }
 
 export function pipeReducer(state: PipeGrid = initialState, action: Action) {
@@ -62,7 +108,7 @@ export function pipeReducer(state: PipeGrid = initialState, action: Action) {
       if (payload.pipe.name === 'btn-delete') {
         return deletePipe(state, payload);
       }
-      if (!validatePipePlacement(state, payload)) return;
+      if (!validatePipePlacement(state, payload)) return state;
       return placePipe(state, payload);
     case ACTION_TYPE.RESET_PIPES:
       return initialState;

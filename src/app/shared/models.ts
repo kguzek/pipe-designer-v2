@@ -32,9 +32,16 @@ export enum ACTION_TYPE {
   RESET_PIPES = '[PIPE] Reset',
 }
 
-export const PIPE_CONNECTIONS: { [name in PipeName]: number[] } = {
-  cross: [0, 1, 2, 3],
-  T: [1, 2, 3],
-  L: [2, 3],
-  straight: [1, 3],
+export enum DIRECTION {
+  UP,
+  RIGHT,
+  DOWN,
+  LEFT,
+}
+
+export const PIPE_CONNECTIONS: { [name in PipeName]: DIRECTION[] } = {
+  cross: [DIRECTION.UP, DIRECTION.RIGHT, DIRECTION.DOWN, DIRECTION.LEFT],
+  T: [DIRECTION.RIGHT, DIRECTION.DOWN, DIRECTION.LEFT],
+  L: [DIRECTION.DOWN, DIRECTION.LEFT],
+  straight: [DIRECTION.RIGHT, DIRECTION.LEFT],
 };
