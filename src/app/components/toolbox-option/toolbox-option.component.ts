@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Tool } from 'src/app/shared/models';
+import { DeleteTool, Pipe } from 'src/app/shared/models';
 import { SetSelectedTool } from 'src/app/shared/tools.actions';
 
 @Component({
@@ -10,7 +10,7 @@ import { SetSelectedTool } from 'src/app/shared/tools.actions';
   styleUrls: ['./toolbox-option.component.scss'],
 })
 export class ToolboxOptionComponent implements OnInit {
-  @Input() tool!: Tool;
+  @Input() tool!: Pipe | DeleteTool;
   @Input() selected!: boolean;
 
   constructor(private store: Store<AppState>) {}

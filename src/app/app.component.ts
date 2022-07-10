@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from './app.state';
-import { PipeGrid, Tool } from './shared/models';
+import { DeleteTool, Pipe, PipeGrid } from './shared/models';
 import { SetSelectedTool } from './shared/tools.actions';
 
 @Component({
@@ -14,7 +14,7 @@ import { SetSelectedTool } from './shared/tools.actions';
 export class AppComponent {
   title = 'pipe-designer-v2';
 
-  tools: Observable<Tool[]>;
+  tools: Observable<Array<Pipe | DeleteTool>>;
   pipes: Observable<PipeGrid>;
 
   constructor(private store: Store<AppState>) {

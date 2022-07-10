@@ -1,7 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Tool } from 'src/app/shared/models';
+import { DeleteTool, Pipe } from 'src/app/shared/models';
 import { RotateSelectedTool } from 'src/app/shared/tools.actions';
 
 @Component({
@@ -11,7 +11,7 @@ import { RotateSelectedTool } from 'src/app/shared/tools.actions';
 })
 export class ToolboxComponent implements OnInit {
   @Input() alt!: string;
-  @Input() tools!: Tool[] | null;
+  @Input() tools!: Array<Pipe | DeleteTool> | null;
 
   constructor(private store: Store<AppState>) {}
 

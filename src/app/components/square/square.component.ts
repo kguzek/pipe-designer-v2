@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
-import { Pipe, Tool } from 'src/app/shared/models';
+import { DeleteTool, Pipe } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-square',
@@ -10,8 +8,8 @@ import { Pipe, Tool } from 'src/app/shared/models';
 })
 export class SquareComponent {
   @Input() pipe!: Pipe | undefined;
-  @Input() selectedTool!: Pipe | undefined;
-  @Input() tools!: Tool[] | null;
+  @Input() selectedTool!: Pipe | DeleteTool | undefined;
+  @Input() tools!: Array<Pipe | DeleteTool> | null;
 
   preview: boolean = false;
 }

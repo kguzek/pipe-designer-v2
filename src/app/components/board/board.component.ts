@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { PipeGrid, Tool } from 'src/app/shared/models';
+import { DeleteTool, Pipe, PipeGrid } from 'src/app/shared/models';
 import { PlacePipeInGrid, ResetPipes } from 'src/app/shared/pipes.actions';
 
 @Component({
@@ -12,7 +12,7 @@ import { PlacePipeInGrid, ResetPipes } from 'src/app/shared/pipes.actions';
 export class BoardComponent implements OnInit {
   rows!: number;
   columns!: number;
-  @Input() tools!: Tool[] | null;
+  @Input() tools!: Array<Pipe | DeleteTool> | null;
   @Input() pipes!: PipeGrid | null;
 
   constructor(private store: Store<AppState>) {}
@@ -43,7 +43,8 @@ export class BoardComponent implements OnInit {
   onClick(row: number, column: number) {
     const selectedTool = this.getSelectedTool();
     if (!selectedTool) return;
-    const { selected, ...pipe } = selectedTool;
-    this.store.dispatch(new PlacePipeInGrid({ row, column, pipe }));
+    this.store.dispatch(
+      new PlacePipeInGrid({ row, column, pipe: selectedTool })
+    );
   }
 }

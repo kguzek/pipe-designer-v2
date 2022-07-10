@@ -3,13 +3,22 @@
   (mouseleave)="preview = false"
   class="bg-white"
 >
-  <img
-    *ngIf="preview && selectedTool"
-    src="assets/images/pipe-{{ selectedTool?.name }}.png"
-    alt="{{ selectedTool?.desc }} pipe element"
-    attr.data-orientation="{{ selectedTool?.orientation ?? 0 }}"
-    class="preview"
-  />
+  <div *ngIf="preview && selectedTool">
+    <img
+      *ngIf="selectedTool.desc"
+      src="assets/images/pipe-{{ selectedTool?.name }}.png"
+      alt="{{ selectedTool?.desc }} pipe element"
+      attr.data-orientation="{{ selectedTool?.orientation ?? 0 }}"
+      class="preview"
+    />
+    <img
+      *ngIf="pipe?.name && !selectedTool.desc"
+      src="assets/images/pipe-{{ pipe?.name }}.png"
+      alt="{{ pipe?.desc }} pipe element"
+      attr.data-orientation="{{ pipe?.orientation ?? 0 }}"
+      class="preview-delete"
+    />
+  </div>
   <img
     *ngIf="!(preview && selectedTool) && pipe?.name && pipe?.desc"
     src="assets/images/pipe-{{ pipe?.name }}.png"

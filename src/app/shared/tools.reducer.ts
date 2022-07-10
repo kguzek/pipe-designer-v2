@@ -1,31 +1,31 @@
-import { ACTION_TYPE, DeleteTool, Tool } from './models';
+import { ACTION_TYPE, Pipe, DeleteTool, PipeName } from './models';
 import {
   Actions as Action,
   RotateSelectedTool,
   SetSelectedTool,
 } from './tools.actions';
 
-const initialState: Array<Tool | DeleteTool> = [
+const initialState: Array<Pipe | DeleteTool> = [
   {
-    name: 'cross',
+    name: 'cross' as PipeName,
     desc: 'Cross-shaped',
     selected: false,
     orientation: 0,
   },
   {
-    name: 'T',
+    name: 'T' as PipeName,
     desc: 'T-shaped',
     selected: false,
     orientation: 0,
   },
   {
-    name: 'L',
+    name: 'L' as PipeName,
     desc: 'L-shaped',
     selected: false,
     orientation: 0,
   },
   {
-    name: 'straight',
+    name: 'straight' as PipeName,
     desc: 'Straight',
     selected: false,
     orientation: 0,
@@ -37,7 +37,7 @@ const initialState: Array<Tool | DeleteTool> = [
 ];
 
 export function toolReducer(
-  state: Array<Tool | DeleteTool> = initialState,
+  state: Array<Pipe | DeleteTool> = initialState,
   action: Action
 ) {
   console.debug(action.type, state);
@@ -50,12 +50,12 @@ export function toolReducer(
       }));
     case ACTION_TYPE.ROTATE_TOOL:
       const isAntiClockwise = (action as RotateSelectedTool).payload;
-      const getOrientation = (tool: Tool) =>
+      const getOrientation = (tool: Pipe) =>
         (tool.orientation + (isAntiClockwise ? 3 : 1)) % 4;
 
       return state.map((tool) =>
         tool.selected
-          ? { ...tool, orientation: getOrientation(tool as Tool) }
+          ? { ...tool, orientation: getOrientation(tool as Pipe) }
           : tool
       );
     default:

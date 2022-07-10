@@ -1,4 +1,10 @@
-import { ACTION_TYPE, Pipe, PipeGrid } from './models';
+import {
+  ACTION_TYPE,
+  Pipe,
+  PipeGrid,
+  PipeName,
+  PIPE_CONNECTIONS,
+} from './models';
 import {
   Actions as Action,
   PipeActionPayload,
@@ -38,15 +44,26 @@ const placePipe = (
   [row]: { ...(state[row] ?? {}), [column]: pipe },
 });
 
+function validatePipePlacement(
+  state: PipeGrid,
+  { row, column, pipe }: PipeActionPayload
+): boolean {
+  const pipeName: PipeName = (pipe as Pipe).name;
+  const orientations = PIPE_CONNECTIONS[pipeName];
+  return true;
+}
+
 export function pipeReducer(state: PipeGrid = initialState, action: Action) {
   console.debug(action.type, state);
 
   switch (action.type as ACTION_TYPE) {
     case ACTION_TYPE.PLACE_PIPE:
       const payload = (action as PlacePipeInGrid).payload;
-      const func = payload.pipe.name === 'btn-delete' ? deletePipe : placePipe;
-      const newState = func(state, payload);
-      return newState;
+      if (payload.pipe.name === 'btn-delete') {
+        return deletePipe(state, payload);
+      }
+      if (!validatePipePlacement(state, payload)) return;
+      return placePipe(state, payload);
     case ACTION_TYPE.RESET_PIPES:
       return initialState;
     default:

@@ -1,7 +1,11 @@
 import { Action } from '@ngrx/store';
-import { ACTION_TYPE, Pipe } from './models';
+import { ACTION_TYPE, Pipe, DeleteTool } from './models';
 
-export type PipeActionPayload = { row: number; column: number; pipe: Pipe };
+export type PipeActionPayload = {
+  row: number;
+  column: number;
+  pipe: Pipe | DeleteTool;
+};
 
 export class PlacePipeInGrid implements Action {
   readonly type = ACTION_TYPE.PLACE_PIPE as string;

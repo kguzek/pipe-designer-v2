@@ -1,6 +1,6 @@
-import { Tool, PipeGrid } from './shared/models';
+import { DeleteTool, Pipe, PipeGrid } from './shared/models';
 
 export interface AppState {
-  readonly tools: Tool[];
+  readonly tools: Array<Pipe | DeleteTool>;
   readonly pipes: PipeGrid;
 }

@@ -1,15 +1,23 @@
+export enum PipeName {
+  cross = 'cross',
+  T = 'T',
+  L = 'L',
+  straight = 'straight',
+}
+
 export interface Pipe {
-  name: string;
+  name: PipeName;
   desc: string;
+  selected: boolean;
   orientation: number;
 }
 
 export interface DeleteTool {
   name: string;
+  desc?: string;
   selected: boolean;
+  orientation?: number;
 }
-
-export interface Tool extends Pipe, DeleteTool {}
 
 export interface PipeGrid {
   [row: number]: {
@@ -23,3 +31,10 @@ export enum ACTION_TYPE {
   PLACE_PIPE = '[PIPE] Place',
   RESET_PIPES = '[PIPE] Reset',
 }
+
+export const PIPE_CONNECTIONS: { [name in PipeName]: number[] } = {
+  cross: [0, 1, 2, 3],
+  T: [1, 2, 3],
+  L: [2, 3],
+  straight: [1, 3],
+};
