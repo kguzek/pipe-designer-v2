@@ -54,7 +54,7 @@ function validatePipePlacement(
 ): boolean {
   const pipe = p as Pipe;
   const pipeConnections = getPipeConnections(pipe);
-  console.log('Pipe connections:', pipeConnections);
+  // console.log('Pipe connections:', pipeConnections);
 
   let tempConnections: DIRECTION[];
 

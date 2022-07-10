@@ -11,5 +11,21 @@ export class SquareComponent {
   @Input() selectedTool!: Pipe | DeleteTool | undefined;
   @Input() tools!: Array<Pipe | DeleteTool> | null;
 
+  entered: boolean = false;
   preview: boolean = false;
+
+  handlePlace() {
+    this.preview = false;
+  }
+
+  handleMouseEnter() {
+    if (this.entered) return;
+    this.entered = true;
+    this.preview = true;
+  }
+
+  handleMouseLeave() {
+    this.entered = false;
+    this.preview = false;
+  }
 }
